@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Piya Tours Sri Lanka - Premium tour packages across Sri Lanka. Explore Ella, Sigiriya, Galle, Kandy & more. Bilingual service in English & Russian. Book your dream Sri Lanka holiday today.">
+<meta name="keywords" content="Sri Lanka tours, Piya Tours, Sri Lanka travel, Ella tours, Sigiriya, Kandy tours, Russian tours Sri Lanka, туры Шри-Ланка, Sri Lanka packages, Beruwala">
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="author" content="W. Piyarathna Silva">
+<meta property="og:title" content="Piya Tours Sri Lanka - Discover Paradise">
+<meta property="og:description" content="Premium guided tours across Sri Lanka. English & Russian bilingual service. Book your adventure today!">
+<meta property="og:type" content="website">
+<meta name="robots" content="index, follow">
+<title>Piya Tours Sri Lanka | Premium Tour Packages | Туры Шри-Ланка</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-lang="en">
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo" onclick="showPage('home')">
+      <img src="LOGO.jpg" alt="Piya Tours Sri Lanka Logo" id="logoImg">
+      <span class="logo-text">Piya Tours | пия туры<br><small>Sri Lanka </small></span>
+    </a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#" onclick="showPage('home')" data-ru="Главная" data-en="Home">Главная</a>
+      <a href="#" onclick="showPage('about')" data-en="About" data-ru="О нас">О нас</a>
+      <a href="#" onclick="showPage('packages')" data-en="Packages" data-ru="Туры">Туры</a>
+      <a href="#" onclick="showPage('gallery')" data-en="Gallery" data-ru="Галерея">Галерея</a>
+      <a href="#" onclick="showPage('contact')" data-en="Contact" data-ru="Контакт">Контакт</a>
+      <button class="lang-btn" onclick="toggleLang()" id="langBtn">🇷🇺 RU</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-shapes">
+        <div class="shape s1"></div>
+        <div class="shape s2"></div>
+        <div class="shape s3"></div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge" data-en="🌴 Sri Lanka's Finest Tours" data-ru="🌴 Лучшие туры Шри-Ланки">🌴 Лучшие туры Шри-Ланки</div>
+      <h1 class="hero-title">
+        <span data-en="Discover the" data-ru="Откройте">Откройте</span><br>
+        <span class="gold" data-en="Magic of Sri Lanka" data-ru="Магию Шри-Ланки">Магию Шри-Ланки</span>
+      </h1>
+      <p class="hero-sub" data-en="Откройте для себя красоту Шри-Ланки с надёжным местным гидом, (Ваш Русскоговорящий Гид по Шри-Ланке) предлагающим безопасные, индивидуальные и незабываемые путешествия для российских туристов" data-ru="Откройте для себя красоту Шри-Ланки с надёжным местным гидом, (Ваш Русскоговорящий Гид по Шри-Ланке) предлагающим безопасные, индивидуальные и незабываемые путешествия для российских туристов.">Откройте для себя красоту Шри-Ланки с надёжным местным гидом, (Ваш Русскоговорящий Гид по Шри-Ланке) предлагающим безопасные, индивидуальные и незабываемые путешествия для российских туристов</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="showPage('packages')" data-en="Explore Packages" data-ru="Смотреть туры">Смотреть туры</button>
+        <button class="btn-outline" onclick="showPage('contact')" data-en="Contact Us" data-ru="Связаться">Связаться</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">500+</span><span class="stat-label" data-en="Happy Travelers" data-ru="Довольных туристов">Довольных туристов</span></div>
+        <div class="stat"><span class="stat-num">9+</span><span class="stat-label" data-en="Tour Packages" data-ru="Туров">Туров</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label" data-en="Satisfaction" data-ru="Удовлетворённость">Удовлетворённость</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint"><span></span></div>
+  </section>
+
+  <!-- ABOUT SNIPPET -->
+  <section class="section about-snippet">
+    <div class="container">
+      <div class="about-snip-grid">
+        <div class="about-snip-img">
+          <div class="img-placeholder about-img-bg">
+            <span>🏝️</span>
+            <p data-en="Beruwala, Sri Lanka" data-ru="Берувала, Шри-Ланка">Берувала, Шри-Ланка</p>
+          </div>
+          <div class="exp-badge"><span>10+</span><small data-en="Years Experience" data-ru="Лет опыта">Лет опыта</small></div>
+        </div>
+        <div class="about-snip-text">
+          <div class="section-label" data-en="About Piya Tours" data-ru="О Piya Tours">О Piya Tours</div>
+          <h2 data-en="Your Trusted Travel Partner in Sri Lanka" data-ru="Ваш надёжный партнёр по путешествиям в Шри-Ланке">Ваш надёжный партнёр по путешествиям в Шри-Ланке</h2>
+          <p data-en="Based in Beruwala, Piya Tours Sri Lanka is run by W. Piyarathna Silva — a passionate local guide dedicated to showing you the true heart of Sri Lanka. We specialize in personalized day trips and multi-day adventures, offering bilingual service in English and Russian." data-ru="Расположенная в Берувале, компания Piya Tours Sri Lanka управляется В. Пиятна Силвой — увлечённым местным гидом, который покажет вам настоящее сердце Шри-Ланки. Мы специализируемся на персональных однодневных и многодневных турах с обслуживанием на английском и русском языках.">Расположенная в Берувале, компания Piya Tours Sri Lanka управляется В. Пиятна Силвой — увлечённым местным гидом, который покажет вам настоящее сердце Шри-Ланки. Мы специализируемся на персональных однодневных и многодневных турах с обслуживанием на английском и русском языках.</p>
+          <ul class="about-features">
+            <li data-en="✓ Bilingual guides (English & Russian)" data-ru="✓ Двуязычные гиды (английский и русский)">✓ Двуязычные гиды (английский и русский)</li>
+            <li data-en="✓ All tickets & entrance fees included" data-ru="✓ Все билеты и входные сборы включены">✓ Все билеты и входные сборы включены</li>
+            <li data-en="✓ Comfortable air-conditioned vehicles" data-ru="✓ Комфортные кондиционированные автомобили">✓ Комфортные кондиционированные автомобили</li>
+            <li data-en="✓ Flexible itineraries" data-ru="✓ Гибкие маршруты">✓ Гибкие маршруты</li>
+          </ul>
+          <button class="btn-primary" onclick="showPage('about')" data-en="Read More About Us" data-ru="Подробнее о нас">Подробнее о нас</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKAGES PREVIEW -->
+  <section class="section packages-preview">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label" data-en="Our Packages" data-ru="Наши туры">Наши туры</div>
+        <h2 data-en="Popular Tour Packages" data-ru="Популярные туры">Популярные туры</h2>
+        <p data-en="Discover Sri Lanka's wonders with our carefully curated tour packages" data-ru="Откройте для себя чудеса Шри-Ланки с нашими тщательно составленными турами">Откройте для себя чудеса Шри-Ланки с нашими тщательно составленными турами</p>
+      </div>
+      <div class="packages-grid" id="homePackagesGrid"></div>
+      <div class="text-center mt-40">
+        <button class="btn-primary" onclick="showPage('packages')" data-en="View All Packages" data-ru="Все туры">Все туры</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY PREVIEW -->
+  <section class="section gallery-preview">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label" data-en="Gallery" data-ru="Галерея">Галерея</div>
+        <h2 data-en="Moments from Our Tours" data-ru="Моменты наших туров">Моменты наших туров</h2>
+      </div>
+      <div class="gallery-preview-grid" id="homeGalleryGrid"></div>
+      <div class="text-center mt-40">
+        <button class="btn-outline" onclick="showPage('gallery')" data-en="View Full Gallery" data-ru="Вся галерея">Вся галерея</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="section reviews-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label" data-en="Testimonials" data-ru="Отзывы">Отзывы</div>
+        <h2 data-en="What Our Travelers Say" data-ru="Что говорят наши туристы">Что говорят наши туристы</h2>
+        <p data-en="Real reviews from our happy travelers" data-ru="Настоящие отзывы наших довольных путешественников">Настоящие отзывы наших довольных путешественников</p>
+      </div>
+      <div class="tagembed-wrap">
+        <div class="tagembed-widget" style="width:100%;height:100%;overflow:auto;" data-widget-id="325754" data-website="1"></div>
+        <script src="https://widget.tagembed.com/embed.min.js" type="text/javascript"></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOME CONTACT FORM -->
+  <section class="section home-contact">
+    <div class="container">
+      <div class="contact-banner">
+        <div class="contact-banner-text">
+          <div class="section-label" data-en="Get In Touch" data-ru="Связаться">Связаться</div>
+          <h2 data-en="Ready for Your Sri Lanka Adventure?" data-ru="Готовы к приключению в Шри-Ланке?">Готовы к приключению в Шри-Ланке?</h2>
+          <p data-en="Contact us via WhatsApp and we'll craft the perfect tour for you!" data-ru="Свяжитесь с нами через WhatsApp, и мы составим идеальный тур для вас!">Свяжитесь с нами через WhatsApp, и мы составим идеальный тур для вас!</p>
+          <div class="contact-quick">
+            <a href="https://wa.me/94777544354" class="whatsapp-btn" target="_blank">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <span data-en="Chat on WhatsApp" data-ru="Написать в WhatsApp">Написать в WhatsApp</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form-mini" id="homeContactFormWrap">
+          <div id="homeContactForm">
+            <input type="text" id="hcName" placeholder="Your Name / Ваше имя">
+            <input type="text" id="hcPhone" placeholder="Phone / Телефон">
+            <select id="hcPackage">
+              <option value="" data-en="Select Package" data-ru="Выберите тур">Выберите тур</option>
+            </select>
+            <textarea id="hcMessage" placeholder="Message / Сообщение" rows="3"></textarea>
+            <button class="btn-primary full-width" onclick="sendWhatsApp('home')" data-en="Send via WhatsApp" data-ru="Отправить через WhatsApp">Отправить через WhatsApp</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== ABOUT PAGE ==================== -->
+<div id="page-about" class="page">
+  <div class="page-hero" style="background: linear-gradient(135deg, #1a2744 0%, #2d5016 100%);">
+    <div class="page-hero-content">
+      <h1 data-en="About Piya Tours Sri Lanka" data-ru="О Piya Tours Шри-Ланка">О Piya Tours Шри-Ланка</h1>
+      <p data-en="Your gateway to authentic Sri Lankan experiences" data-ru="Ваш путь к подлинным впечатлениям о Шри-Ланке">Ваш путь к подлинным впечатлениям о Шри-Ланке</p>
+    </div>
+  </div>
+  
+  <section class="section">
+    <div class="container">
+      <div class="about-full-grid">
+        <div class="about-main">
+          <div class="section-label" data-en="Our Story" data-ru="Наша история">Наша история</div>
+          <h2 data-en="Welcome to Piya Tours Sri Lanka" data-ru="Добро пожаловать в Piya Tours Шри-Ланка">Добро пожаловать в Piya Tours Шри-Ланка</h2>
+          <p data-en="Piya Tours Sri Lanka is a premier travel company based in the beautiful coastal town of Beruwala, Sri Lanka. Founded and operated by W. Piyarathna Silva, we have been crafting unforgettable travel experiences for tourists from around the world, with a special focus on serving Russian-speaking visitors." data-ru="Piya Tours Sri Lanka — ведущая туристическая компания, расположенная в красивом прибрежном городе Берувала, Шри-Ланка. Основанная и управляемая В. Пиятна Силвой, мы создаём незабываемые впечатления для туристов со всего мира, уделяя особое внимание обслуживанию русскоязычных гостей.">"Piya Tours Sri Lanka — ведущая туристическая компания, расположенная в красивом прибрежном городе Берувала, Шри-Ланка. Основанная и управляемая В. Пиятна Силвой, мы создаём незабываемые впечатления для туристов со всего мира, уделяя особое внимание обслуживанию русскоязычных гостей.</p>
+          
+          <p data-en="Sri Lanka, the 'Pearl of the Indian Ocean', is a land of extraordinary diversity — from the misty highlands of Ella and the ancient ruins of Sigiriya to the golden beaches of Beruwala and the vibrant streets of Colombo. Our mission is to connect you with the real Sri Lanka — its people, culture, wildlife, and landscapes — in a way that is safe, comfortable, and deeply enriching." data-ru="Шри-Ланка, «Жемчужина Индийского океана», — страна удивительного разнообразия: от туманных нагорий Эллы и древних руин Сигирии до золотых пляжей Берувалы и оживлённых улиц Коломбо. Наша миссия — познакомить вас с настоящей Шри-Ланкой — её людьми, культурой, дикой природой и пейзажами — безопасно, комфортно и глубоко обогащающим образом.">"Шри-Ланка, «Жемчужина Индийского океана», — страна удивительного разнообразия: от туманных нагорий Эллы и древних руин Сигирии до золотых пляжей Берувалы и оживлённых улиц Коломбо. Наша миссия — познакомить вас с настоящей Шри-Ланкой — её людьми, культурой, дикой природой и пейзажами — безопасно, комфортно и глубоко обогащающим образом.</p>
+
+          <p data-en="The heart and soul of Piya Tours, W. Piyaratne Silva, is a certified professional guide with a deep knowledge of Sri Lankan history, culture and geography. His warm personality, fluent English and Russian language skills, and dedication to the satisfaction of every client have earned him glowing reviews from hundreds of satisfied travelers. He personally supervises each tour to ensure the highest quality service." data-ru="Сердце и душа Piya Tours, У. Пияратне Сильва, — сертифицированный профессиональный гид с глубокими знаниями истории, культуры и географии Шри-Ланки. Его доброжелательность, свободное владение английским и русским языками, а также стремление к удовлетворению потребностей каждого клиента заслужили восторженные отзывы от сотен довольных путешественников. Он лично контролирует каждый тур, чтобы обеспечить высочайшее качество обслуживания.">Сердце и душа Piya Tours, У. Пияратне Сильва, — сертифицированный профессиональный гид с глубокими знаниями истории, культуры и географии Шри-Ланки. Его доброжелательность, свободное владение английским и русским языками, а также стремление к удовлетворению потребностей каждого клиента заслужили восторженные отзывы от сотен довольных путешественников. Он лично контролирует каждый тур, чтобы обеспечить высочайшее качество обслуживания.</p>
+
+          <div class="about-divider"></div>
+          
+          <div class="section-label" data-en="Sri Lankan Tourism" data-ru="Туризм Шри-Ланки">Туризм Шри-Ланки</div>
+          <h3 data-en="Why Visit Sri Lanka?" data-ru="Почему стоит посетить Шри-Ланку?">Почему стоит посетить Шри-Ланку?</h3>
+          <p data-en="Sri Lanka packs an incredible amount of diversity into a relatively small island. In a single day, you can explore ancient cave temples, walk through misty tea plantations, spot wild elephants, and relax on a pristine beach. The island boasts 8 UNESCO World Heritage Sites, including the magnificent Sigiriya Rock Fortress, the Sacred City of Kandy, the Dambulla Cave Temple, and the Ancient City of Polonnaruwa." data-ru="Шри-Ланка вмещает невероятное разнообразие на относительно небольшом острове. За один день вы можете исследовать древние пещерные храмы, прогуляться по туманным чайным плантациям, понаблюдать за дикими слонами и отдохнуть на нетронутом пляже. На острове находятся 8 объектов Всемирного наследия ЮНЕСКО, включая великолепную скальную крепость Сигирия, Священный город Канди, пещерный храм Дамбулла и Древний город Полоннарува.">Шри-Ланка вмещает невероятное разнообразие на относительно небольшом острове. За один день вы можете исследовать древние пещерные храмы, прогуляться по туманным чайным плантациям, понаблюдать за дикими слонами и отдохнуть на нетронутом пляже. На острове находятся 8 объектов Всемирного наследия ЮНЕСКО, включая великолепную скальную крепость Сигирия, Священный город Канди, пещерный храм Дамбулла и Древний город Полоннарува.</p>
+
+          <p data-en="The country is also known for its rich wildlife - Wilpattu National Park is home to the world's largest population of leopards, while Yala National Park is home to similar numbers of leopards and tigers. Udawalawe and Minneriya are famous for their elephant herds. Sri Lankan cuisine is a delightful blend of spices and flavors, and its people are known for their warm and hospitable nature." data-ru="Страна также известна своим богатым животным миром: в национальном парке Вилпатту обитает самая большая в мире популяция леопардов, а в национальном парке Яла – примерно такое же количество леопардов и тигров. Удавалаве и Миннерия славятся своими стадами слонов. Шри-ланкийская кухня представляет собой восхитительное сочетание специй и ароматов, а ее жители известны своим теплым и гостеприимным характером.">Страна также известна своим богатым животным миром: в национальном парке Вилпатту обитает самая большая в мире популяция леопардов, а в национальном парке Яла – примерно такое же количество леопардов и тигров. Удавалаве и Миннерия славятся своими стадами слонов. Шри-ланкийская кухня представляет собой восхитительное сочетание специй и ароматов, а ее жители известны своим теплым и гостеприимным характером.</p>
+        </div>
+
+        <div class="about-sidebar">
+          <div class="guide-card">
+            <div class="guide-photo">
+              <img src="guide_photo.png" alt="W. Piyarathna Silva - Tour Guide"
+                   style="width:120px;height:120px;border-radius:50%;object-fit:cover;object-position:top center;display:block;margin:0 auto;border:4px solid var(--gold);box-shadow:0 4px 20px rgba(245,166,35,0.3);">
+            </div>
+            <h3>W. Piyarathna Silva</h3>
+            <p class="guide-title" data-en="Founder & Lead Guide" data-ru="Основатель и главный гид">Основатель и главный гид</p>
+            <p data-en="A passionate Sri Lankan guide with years of experience creating unforgettable travel experiences for international tourists." data-ru="Страстный гид из Шри-Ланки с многолетним опытом создания незабываемых впечатлений для иностранных туристов.">Страстный гид из Шри-Ланки с многолетним опытом создания незабываемых впечатлений для иностранных туристов.</p>
+            <div class="guide-langs">
+              <span>🇬🇧 English</span>
+              <span>🇷🇺 Русский</span>
+              <span>🇱🇰 Sinhala</span>
+              <span>🇱🇰 German</span>
+            </div>
+            <a href="https://wa.me/94777544354" class="whatsapp-btn small" target="_blank">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+              <span data-en="Message Now" data-ru="Написать">Написать</span>
+            </a>
+          </div>
+
+          <div class="why-us-card">
+            <h3 data-en="Why Choose Us?" data-ru="Почему мы?">Почему мы?</h3>
+            <div class="why-item"><span class="why-icon">🎯</span><div><strong data-en="Personalized Service" data-ru="Персональный сервис">Personalized Service</strong><p data-en="Every tour is tailored to your preferences" data-ru="Каждый тур подстраивается под ваши предпочтения">Каждый тур подстраивается под ваши предпочтения</p></div></div>
+            <div class="why-item"><span class="why-icon">🌍</span><div><strong data-en="Bilingual Guides" data-ru="Двуязычные гиды">Bilingual Guides</strong><p data-en="Comfortable communication in English & Russian" data-ru="Комфортное общение на английском и русском">Комфортное общение на английском и русском</p></div></div>
+            <div class="why-item"><span class="why-icon">🎫</span><div><strong data-en="All-Inclusive" data-ru="Всё включено">All-Inclusive</strong><p data-en="Tickets and entrance fees are always included" data-ru="Билеты и входные сборы всегда включены">Билеты и входные сборы всегда включены</p></div></div>
+            <div class="why-item"><span class="why-icon">🚗</span><div><strong data-en="Comfortable Transport" data-ru="Комфортный транспорт">Comfortable Transport</strong><p data-en="Air-conditioned vehicles for all tours" data-ru="Кондиционированные автомобили для всех туров">Кондиционированные автомобили для всех туров</p></div></div>
+            <div class="why-item"><span class="why-icon">📞</span><div><strong data-en="24/7 Support" data-ru="Поддержка 24/7">24/7 Support</strong><p data-en="We're always available via WhatsApp" data-ru="Мы всегда доступны через WhatsApp">Мы всегда доступны через WhatsApp</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== PACKAGES PAGE ==================== -->
+<div id="page-packages" class="page">
+  <div class="page-hero" style="background: linear-gradient(135deg, #2d1b00 0%, #f5a623 100%);">
+    <div class="page-hero-content">
+      <h1 data-en="Our Tour Packages" data-ru="Наши туры">Наши туры</h1>
+      <p data-en="9 carefully curated packages — from beach escapes to highland adventures" data-ru="9 тщательно подобранных пакетов — от пляжного отдыха до горных приключений">9 тщательно подобранных пакетов — от пляжного отдыха до горных приключений</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="packages-full-grid" id="fullPackagesGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== GALLERY PAGE ==================== -->
+<div id="page-gallery" class="page">
+  <div class="page-hero" style="background: linear-gradient(135deg, #0d2137 0%, #1a6b8a 100%);">
+    <div class="page-hero-content">
+      <h1 data-en="Photo Gallery" data-ru="Фотогалерея">Фотогалерея</h1>
+      <p data-en="Memories from our tours across Sri Lanka" data-ru="Воспоминания из наших туров по Шри-Ланке">Воспоминания из наших туров по Шри-Ланк</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="gallery-upload-notice">
+        <p data-en="📸 Gallery photos will be added here. Contact us to see more photos of our tours!" data-ru="📸 Фотографии галереи будут добавлены сюда. Свяжитесь с нами для просмотра большего количества фотографий наших туров!">📸 Фотографии галереи будут добавлены сюда. Свяжитесь с нами для просмотра большего количества фотографий наших туров!</p>
+      </div>
+      <div class="gallery-full-grid" id="fullGalleryGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ==================== CONTACT PAGE ==================== -->
+<div id="page-contact" class="page">
+  <div class="page-hero" style="background: linear-gradient(135deg, #1a0a2e 0%, #16213e 100%);">
+    <div class="page-hero-content">
+      <h1 data-en="Contact Us" data-ru="Контакты">Контакты</h1>
+      <p data-en="We'd love to help you plan your perfect Sri Lanka adventure" data-ru="Мы рады помочь вам спланировать идеальное приключение в Шри-Ланке">Мы рады помочь вам спланировать идеальное приключение в Шри-Ланке</p>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="section-label" data-en="Get In Touch" data-ru="Контактная информация">Контактная информация</div>
+          <h2 data-en="Let's Plan Your Tour" data-ru="Давайте спланируем ваш тур">Давайте спланируем ваш тур</h2>
+          
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon">📱</div>
+              <div>
+                <strong data-en="WhatsApp / Phone" data-ru="WhatsApp / Телефон">WhatsApp / Телефон</strong>
+                <a href="https://wa.me/94777544354">+94 777 544 354</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">✉️</div>
+              <div>
+                <strong data-en="Email" data-ru="Электронная почта">Электронная почта</strong>
+                <a href="mailto:piyatuorsinfo@gmail.com">piyatuorsinfo@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">📍</div>
+              <div>
+                <strong data-en="Location" data-ru="Местоположение">Местоположение</strong>
+                <span data-en="Beruwala, Sri Lanka" data-ru="Берувала, Шри-Ланка">Берувала, Шри-Ланка</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <h3 data-en="Follow Us" data-ru="Следите за нами">Следите за нами</h3>
+            <div class="social-grid">
+              <a href="https://www.instagram.com/piya_tours?igsh=eW5rOGE1MHl5d3Bs" class="social-link instagram" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61570683902896&mibextid=ZbWKwL" class="social-link facebook" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+              </a>
+              <a href="https://www.tiktok.com/@piyatours" class="social-link tiktok" target="_blank">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+                TikTok
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-section">
+          <div class="contact-form-card">
+            <h3 data-en="Send Us a Message" data-ru="Отправьте нам сообщение">Отправьте нам сообщение</h3>
+            <p data-en="Fill out the form below — your message will be sent directly to our WhatsApp!" data-ru="Заполните форму ниже — ваше сообщение будет отправлено прямо на наш WhatsApp!">Заполните форму ниже — ваше сообщение будет отправлено прямо на наш WhatsApp!</p>
+            <input type="text" id="cName" placeholder="Your Name / Ваше имя">
+            <input type="text" id="cPhone" placeholder="Phone / Телефон">
+            <input type="email" id="cEmail" placeholder="Email">
+            <select id="cPackage">
+              <option value="" data-en="Interested Package" data-ru="Интересующий тур">Интересующий тур</option>
+            </select>
+            <input type="text" id="cDate" placeholder="Preferred Date / Дата (DD/MM/YYYY)">
+            <textarea id="cMessage" placeholder="Your message / Ваше сообщение" rows="4"></textarea>
+            <button class="btn-primary full-width" onclick="sendWhatsApp('contact')" data-en="Send via WhatsApp" data-ru="Отправить через WhatsApp">Отправить через WhatsApp</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Map -->
+      <div class="map-section">
+        <h3 data-en="Find Us — Beruwala, Sri Lanka" data-ru="Найдите нас — Берувала, Шри-Ланка">Найдите нас — Берувала, Шри-Ланка</h3>
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63424.82!2d79.9725!3d6.4774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae23b4aa5b99bcd%3A0x7bdc00e0ffe5bfd4!2sBeruwala%2C%20Sri%20Lanka!5e0!3m2!1sen!2slk!4v1"
+            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            title="Beruwala Sri Lanka Map">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Package Modal -->
+<div id="packageModal" class="modal-overlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-prev" onclick="lbNav(-1,event)">‹</button>
+  <div class="lb-img-wrap"><img id="lbImg" src="" alt="Gallery Image"></div>
+  <button class="lb-next" onclick="lbNav(1,event)">›</button>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand">
+      <img src="LOGO.jpg" alt="Piya Tours Logo" class="footer-logo">
+      <h3>Piya Tours Sri Lanka</h3>
+      <p data-en="Your premier travel partner in Sri Lanka. Bilingual tours in English & Russian." data-ru="Ваш ведущий туристический партнёр в Шри-Ланке. Двуязычные туры на английском и русском.">Ваш ведущий туристический партнёр в Шри-Ланке. Двуязычные туры на английском и русском.</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/piya_tours?igsh=eW5rOGE1MHl5d3Bs" title="Instagram" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=61570683902896&mibextid=ZbWKwL" title="Facebook" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.tiktok.com/@piyatours" title="TikTok" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg></a>
+        <a href="https://wa.me/94777544354" title="WhatsApp" target="_blank"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+      </div>
+    </div>
+    <div class="footer-links">
+      <h4 data-en="Quick Links" data-ru="Быстрые ссылки">Быстрые ссылки</h4>
+      <a href="#" onclick="showPage('home')" data-en="Home" data-ru="Главная">Главная</a>
+      <a href="#" onclick="showPage('about')" data-en="About Us" data-ru="О нас">О нас</a>
+      <a href="#" onclick="showPage('packages')" data-en="Tour Packages" data-ru="Туры">Туры</a>
+      <a href="#" onclick="showPage('gallery')" data-en="Gallery" data-ru="Галерея">Галерея</a>
+      <a href="#" onclick="showPage('contact')" data-en="Contact" data-ru="Контакт">Контакт</a>
+    </div>
+    <div class="footer-contact">
+      <h4 data-en="Contact Info" data-ru="Контактная информация">Контактная информация</h4>
+      <p>📱 <a href="https://wa.me/94777544354">+94 777 544 354</a></p>
+      <p>✉️ <a href="mailto:piyatuorsinfo@gmail.com">piyatuorsinfo@gmail.com</a></p>
+      <p>📍 <span data-en="Beruwala, Sri Lanka" data-ru="Берувала, Шри-Ланка">Берувала, Шри-Ланка</span></p>
+      <a href="https://wa.me/94777544354" class="whatsapp-btn" style="margin-top:16px;" target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Piya Tours Sri Lanka. <span data-en="All rights reserved." data-ru="Все права защищены.">Все права защищены..</span> | <span data-en="Designed & managed by" data-ru="Разработано и управляется">Разработано и управляется</span> ideachat Digital creation </p>
+  </div>
+</footer>
+
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+<script>
+  // TODO: Replace with your complete Firebase configuration
+  const firebaseConfig = {
+      apiKey: "AIzaSyA9JKYUuW9stYqHK0Nw-9nEJ2GfaAOxP08",
+      authDomain: "piyayours-580f2.firebaseapp.com",
+      databaseURL: "https://piyayours-580f2-default-rtdb.firebaseio.com",
+      projectId: "piyayours-580f2",
+      storageBucket: "piyayours-580f2.firebasestorage.app",
+      messagingSenderId: "342336494553",
+      appId: "1:342336494553:web:ca67e24983b74db1db97c8",
+      measurementId: "G-SSCPZRDR3T"
+  };
+  
+  if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+  }
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>
