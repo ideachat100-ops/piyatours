@@ -69,9 +69,7 @@ uploadForm.addEventListener('submit', async (e) => {
         // 1. Upload to ImgBB
         const imgbbApiKey = "2154864daa0d336b49f270f13c4936e6"; // මෙතැනට ඔයාගේ ImgBB API Key එක දාන්න (අකුරු 32ක කේතය පමණක් දාන්න)
 
-        if (imgbbApiKey === "2154864daa0d336b49f270f13c4936e6") {
-            throw new Error("කරුණාකර admin.js ෆයිල් එකට ඔබගේ ImgBB API Key එක ඇතුලත් කරන්න.");
-        }
+
 
         const formData = new FormData();
         formData.append("image", file);
