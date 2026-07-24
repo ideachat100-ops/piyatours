@@ -32,11 +32,11 @@ const adminGalleryGrid = document.getElementById('adminGalleryGrid');
 const loadingPhotos = document.getElementById('loadingPhotos');
 
 // Image Preview
-photoFileInput.addEventListener('change', function(e) {
+photoFileInput.addEventListener('change', function (e) {
     const file = e.target.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             imagePreview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
         }
         reader.readAsDataURL(file);
@@ -48,7 +48,7 @@ photoFileInput.addEventListener('change', function(e) {
 // Upload Photo
 uploadForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const file = photoFileInput.files[0];
     if (!file) return;
 
@@ -65,14 +65,30 @@ uploadForm.addEventListener('submit', async (e) => {
         // Create a unique file name
         const timestamp = new Date().getTime();
         const fileName = `gallery/${timestamp}_${file.name}`;
-        
-        // 1. Upload to Firebase Storage
-        const storageRef = storage.ref(fileName);
-        const snapshot = await storageRef.put(file);
-        
+
+        // 1. Upload to ImgBB
+        const imgbbApiKey = "2154864daa0d336b49f270f13c4936e6"; // මෙතැනට ඔයාගේ ImgBB API Key එක දාන්න (අකුරු 32ක කේතය පමණක් දාන්න)
+
+        if (imgbbApiKey === "2154864daa0d336b49f270f13c4936e6") {
+            throw new Error("කරුණාකර admin.js ෆයිල් එකට ඔබගේ ImgBB API Key එක ඇතුලත් කරන්න.");
+        }
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const response = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        if (!data.success) {
+            throw new Error(data.error?.message || "ImgBB වෙත Upload කිරීම අසාර්ථක විය");
+        }
+
         // 2. Get the download URL
-        const downloadURL = await snapshot.ref.getDownloadURL();
-        
+        const downloadURL = data.data.url;
+
         // 3. Save metadata to Realtime Database
         const newPhotoData = {
             url: downloadURL,
@@ -80,14 +96,14 @@ uploadForm.addEventListener('submit', async (e) => {
             label_ru: labelRuInput.value || "Галерея Изображение",
             timestamp: timestamp
         };
-        
+
         await db.ref('gallery').push(newPhotoData);
-        
+
         // Success
         showStatus('Photo uploaded successfully!', 'success');
         uploadForm.reset();
         imagePreview.innerHTML = '';
-        
+
     } catch (error) {
         console.error("Upload error:", error);
         showStatus(`Error uploading photo: ${error.message}`, 'error');
@@ -102,7 +118,7 @@ function showStatus(message, type) {
     uploadStatus.className = 'status-msg';
     if (type === 'success') uploadStatus.classList.add('status-success');
     if (type === 'error') uploadStatus.classList.add('status-error');
-    
+
     if (type === 'success') {
         setTimeout(() => {
             uploadStatus.textContent = '';
@@ -116,10 +132,18 @@ function loadAdminGallery() {
     db.ref('deleted_local').on('value', (delSnapshot) => {
         const deletedData = delSnapshot.val() || {};
         const deletedLocalPhotos = Object.values(deletedData);
-        
+
         db.ref('gallery').once('value').then((snapshot) => {
             renderAdminGrid(snapshot.val(), deletedLocalPhotos);
+        }).catch(err => {
+            loadingPhotos.style.display = 'block';
+            loadingPhotos.style.color = 'red';
+            loadingPhotos.textContent = `Error loading gallery: ${err.message}. Check Firebase Database Rules.`;
         });
+    }, (error) => {
+        loadingPhotos.style.display = 'block';
+        loadingPhotos.style.color = 'red';
+        loadingPhotos.textContent = `Error loading deleted_local: ${error.message}. Check Firebase Database Rules.`;
     });
 
     db.ref('gallery').on('value', (snapshot) => {
@@ -127,16 +151,22 @@ function loadAdminGallery() {
             const deletedData = delSnapshot.val() || {};
             const deletedLocalPhotos = Object.values(deletedData);
             renderAdminGrid(snapshot.val(), deletedLocalPhotos);
+        }).catch(err => {
+            console.error("Error reading deleted_local", err);
         });
+    }, (error) => {
+        loadingPhotos.style.display = 'block';
+        loadingPhotos.style.color = 'red';
+        loadingPhotos.textContent = `Error loading gallery: ${error.message}. Check Firebase Database Rules.`;
     });
 }
 
 function renderAdminGrid(galleryData, deletedLocalPhotos) {
     loadingPhotos.style.display = 'none';
     adminGalleryGrid.innerHTML = '';
-    
+
     let hasPhotos = false;
-    
+
     // 1. Render Local Photos first (filtering out deleted ones)
     // INITIAL_PHOTOS and INITIAL_ITEMS are defined in script.js
     if (typeof INITIAL_PHOTOS !== 'undefined' && INITIAL_PHOTOS) {
@@ -200,7 +230,7 @@ window.deletePhoto = async (id, url) => {
     try {
         // 1. Delete from Realtime Database
         await db.ref(`gallery/${id}`).remove();
-        
+
         // 2. Delete from Storage (Extract path from URL)
         const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/`;
         if (url.startsWith(baseUrl)) {
@@ -209,7 +239,7 @@ window.deletePhoto = async (id, url) => {
             imagePath = decodeURIComponent(imagePath);
             await storage.ref(imagePath).delete();
         }
-        
+
     } catch (error) {
         console.error("Error deleting photo:", error);
         alert(`Error deleting photo: ${error.message}`);
