@@ -189,7 +189,7 @@ function renderAdminGrid(galleryData, deletedLocalPhotos) {
         });
     }
 
-    // 2. Render Firebase Photos
+    // 2. Render Firebase/ImgBB Photos
     if (galleryData) {
         hasPhotos = true;
         // Convert object to array and sort by timestamp descending
@@ -202,14 +202,14 @@ function renderAdminGrid(galleryData, deletedLocalPhotos) {
             const item = document.createElement('div');
             item.className = 'gallery-item';
             item.innerHTML = `
-                <div style="position:absolute; top:8px; left:8px; background:var(--primary); color:white; padding:4px 8px; border-radius:4px; font-size:11px; z-index:10;">Firebase</div>
+                <div style="position:absolute; top:8px; left:8px; background:#e67e22; color:white; padding:4px 8px; border-radius:4px; font-size:11px; z-index:10;">Uploaded</div>
                 <img src="${photo.url}" alt="${photo.label_en}" loading="lazy">
                 <div class="gallery-item-info">
                     <p><strong>EN:</strong> ${photo.label_en}</p>
                     <p><strong>RU:</strong> ${photo.label_ru}</p>
                 </div>
                 <div class="gallery-item-actions">
-                    <button class="btn btn-danger" onclick="deletePhoto('${photo.id}', '${photo.url}')">Delete</button>
+                    <button class="btn btn-danger" onclick="deletePhoto('${photo.id}')">🗑️ Delete</button>
                 </div>
             `;
             adminGalleryGrid.appendChild(item);
@@ -221,36 +221,28 @@ function renderAdminGrid(galleryData, deletedLocalPhotos) {
     }
 }
 
-// Delete Photo
-window.deletePhoto = async (id, url) => {
-    if (!confirm("Are you sure you want to delete this photo?")) return;
+// Delete Uploaded Photo (ImgBB URL stored in Firebase DB)
+window.deletePhoto = async (id) => {
+    if (!confirm("මේ ෆොටෝ එක delete කරන්නද? (Gallery page එකෙන් ඉවත් වෙනවා)")) return;
 
     try {
-        // 1. Delete from Realtime Database
+        // Remove from Realtime Database only (ImgBB image stays but won't show in gallery)
         await db.ref(`gallery/${id}`).remove();
-
-        // 2. Delete from Storage (Extract path from URL)
-        const baseUrl = `https://firebasestorage.googleapis.com/v0/b/${firebaseConfig.storageBucket}/o/`;
-        if (url.startsWith(baseUrl)) {
-            let imagePath = url.replace(baseUrl, "");
-            imagePath = imagePath.split("?")[0];
-            imagePath = decodeURIComponent(imagePath);
-            await storage.ref(imagePath).delete();
-        }
-
+        // Success — the 'on value' listener will auto re-render the grid
     } catch (error) {
         console.error("Error deleting photo:", error);
         alert(`Error deleting photo: ${error.message}`);
     }
 };
 
-// Hide/Delete Local Photo
+// Hide Local Photo from gallery (marks it in Firebase DB)
 window.deleteLocalPhoto = async (photoUrl) => {
-    if (!confirm("Are you sure you want to hide this local photo from the gallery?")) return;
+    if (!confirm("මේ local ෆොටෝ එක Gallery page එකෙන් hide කරන්නද?")) return;
 
     try {
-        // Add to deleted_local array in Realtime Database
+        // Add to deleted_local list in Realtime Database
         await db.ref('deleted_local').push(photoUrl);
+        // Success — the 'on value' listener will auto re-render the grid
     } catch (error) {
         console.error("Error hiding local photo:", error);
         alert(`Error hiding local photo: ${error.message}`);
