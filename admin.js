@@ -165,40 +165,45 @@ function renderAdminGrid(galleryData, deletedLocalPhotos) {
 
     let hasPhotos = false;
 
-    // 1. Render Local Photos first (filtering out deleted ones)
-    // INITIAL_PHOTOS and INITIAL_ITEMS are defined in script.js
-    if (typeof INITIAL_PHOTOS !== 'undefined' && INITIAL_PHOTOS) {
-        INITIAL_PHOTOS.forEach((photo, index) => {
+    // 1. Render Local Photos first (safe fallback if INITIAL_PHOTOS not defined)
+    try {
+        const localPhotos = (typeof GALLERY_PHOTOS !== 'undefined' && GALLERY_PHOTOS) ? GALLERY_PHOTOS : [];
+        const localItems  = (typeof GALLERY_ITEMS  !== 'undefined' && GALLERY_ITEMS)  ? GALLERY_ITEMS  : [];
+
+        localPhotos.forEach((photo, index) => {
             if (!deletedLocalPhotos.includes(photo)) {
                 hasPhotos = true;
+                const label_en = localItems[index]?.label_en || 'Local Photo';
+                const label_ru = localItems[index]?.label_ru || 'Местное фото';
                 const item = document.createElement('div');
                 item.className = 'gallery-item';
                 item.innerHTML = `
-                    <div style="position:absolute; top:8px; left:8px; background:rgba(0,0,0,0.6); color:white; padding:4px 8px; border-radius:4px; font-size:11px; z-index:10;">Local Photo</div>
+                    <div style="position:absolute; top:8px; left:8px; background:rgba(0,0,0,0.65); color:white; padding:4px 8px; border-radius:4px; font-size:11px; z-index:10;">Local Photo</div>
                     <img src="${photo}" alt="Local Image" loading="lazy">
                     <div class="gallery-item-info">
-                        <p><strong>EN:</strong> ${INITIAL_ITEMS[index]?.label_en || "Local Image"}</p>
-                        <p><strong>RU:</strong> ${INITIAL_ITEMS[index]?.label_ru || "Локальное Изображение"}</p>
+                        <p><strong>EN:</strong> ${label_en}</p>
+                        <p><strong>RU:</strong> ${label_ru}</p>
                     </div>
                     <div class="gallery-item-actions">
-                        <button class="btn btn-danger" onclick="deleteLocalPhoto('${photo}')">Hide/Delete</button>
+                        <button class="btn btn-danger" onclick="deleteLocalPhoto('${photo}')">🙈 Hide</button>
                     </div>
                 `;
                 adminGalleryGrid.appendChild(item);
             }
         });
+    } catch (e) {
+        console.warn('Local photos could not be rendered:', e.message);
     }
 
-    // 2. Render Firebase/ImgBB Photos
+    // 2. Render Uploaded (ImgBB) Photos from Firebase DB
     if (galleryData) {
-        hasPhotos = true;
-        // Convert object to array and sort by timestamp descending
         const photosArray = Object.keys(galleryData).map(key => ({
             id: key,
             ...galleryData[key]
         })).sort((a, b) => b.timestamp - a.timestamp);
 
         photosArray.forEach(photo => {
+            hasPhotos = true;
             const item = document.createElement('div');
             item.className = 'gallery-item';
             item.innerHTML = `
@@ -217,7 +222,7 @@ function renderAdminGrid(galleryData, deletedLocalPhotos) {
     }
 
     if (!hasPhotos) {
-        adminGalleryGrid.innerHTML = '<p>No photos uploaded yet.</p>';
+        adminGalleryGrid.innerHTML = '<p>No photos yet.</p>';
     }
 }
 
