@@ -254,5 +254,76 @@ window.deleteLocalPhoto = async (photoUrl) => {
     }
 };
 
+// Load and display reviews in Admin Panel
+function loadAdminReviews() {
+    const loadingReviews = document.getElementById('loadingReviews');
+    const adminReviewsList = document.getElementById('adminReviewsList');
+    if (!adminReviewsList) return;
+
+    db.ref('reviews').on('value', (snapshot) => {
+        loadingReviews.style.display = 'none';
+        adminReviewsList.innerHTML = '';
+
+        const data = snapshot.val();
+        if (!data) {
+            adminReviewsList.innerHTML = '<div class="reviews-empty-state">No reviews submitted yet.</div>';
+            return;
+        }
+
+        const reviewsArray = Object.keys(data).map(key => ({
+            id: key,
+            ...data[key]
+        })).sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0)); // Newest first
+
+        reviewsArray.forEach(review => {
+            const card = document.createElement('div');
+            card.className = 'admin-review-card';
+            
+            const rating = review.rating || 5;
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += i <= rating ? '★' : '☆';
+            }
+            
+            const tourTaken = review.tour ? ` | Tour: ${review.tour}` : '';
+            const reviewLang = review.lang ? ` | Lang: ${review.lang.toUpperCase()}` : '';
+
+            card.innerHTML = `
+                <div class="admin-review-header">
+                    <div class="admin-review-meta">
+                        <span class="admin-review-name">${review.name}</span>
+                        <span class="admin-review-email">${review.email}</span>
+                        <div class="admin-review-info">${review.date || ''}${tourTaken}${reviewLang}</div>
+                        <div class="admin-review-stars">${starsHtml}</div>
+                    </div>
+                </div>
+                <div class="admin-review-text">"${review.text}"</div>
+                <div class="admin-review-actions">
+                    <button class="btn btn-danger" onclick="deleteReview('${review.id}')">🗑️ Delete</button>
+                </div>
+            `;
+            adminReviewsList.appendChild(card);
+        });
+    }, (error) => {
+        loadingReviews.style.display = 'block';
+        loadingReviews.style.color = 'red';
+        loadingReviews.textContent = `Error loading reviews: ${error.message}`;
+    });
+}
+
+// Delete/Reject Review
+window.deleteReview = async (id) => {
+    if (!confirm("Are you sure you want to delete this review?")) return;
+    try {
+        await db.ref(`reviews/${id}`).remove();
+    } catch (error) {
+        console.error("Error deleting review:", error);
+        alert(`Error deleting review: ${error.message}`);
+    }
+};
+
 // Initial load
-document.addEventListener('DOMContentLoaded', loadAdminGallery);
+document.addEventListener('DOMContentLoaded', () => {
+    loadAdminGallery();
+    loadAdminReviews();
+});

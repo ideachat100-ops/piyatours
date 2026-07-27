@@ -480,7 +480,7 @@ function lbNav(dir, event) {
 
 // ---- PACKAGE SELECTS ----
 function updatePackageSelects() {
-  const selects = document.querySelectorAll('#hcPackage, #cPackage');
+  const selects = document.querySelectorAll('#hcPackage, #cPackage, #reviewTour');
   selects.forEach(sel => {
     const val = sel.value;
     sel.innerHTML = `<option value="">${currentLang === 'en' ? 'Select Package' : 'Выберите тур'}</option>`;
@@ -614,6 +614,8 @@ function init() {
   injectBeruwalPhoto();
   injectHeroBranding();
   loadFirebaseGallery();
+  loadApprovedReviews();
+  setupReviewsStars();
 }
 
 document.addEventListener('DOMContentLoaded', init);
@@ -708,4 +710,297 @@ function injectBeruwalPhoto() {
   label.style.cssText = 'position:absolute;bottom:0;left:0;right:0;padding:16px 20px;background:linear-gradient(transparent,rgba(0,0,0,0.65));color:white;font-size:14px;font-weight:600;';
   label.innerHTML = '📍 Beruwala, Sri Lanka';
   placeholder.appendChild(label);
+}
+
+// =============================================
+// CUSTOM REVIEWS LOGIC (FIREBASE BACKED)
+// =============================================
+
+function loadApprovedReviews() {
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  if (!reviewsGrid) return;
+
+  if (typeof firebase === 'undefined' || !firebase.apps.length) {
+    renderReviewsList(DEFAULT_REVIEWS);
+    return;
+  }
+
+  const db = firebase.database();
+  db.ref('reviews').on('value', (snapshot) => {
+    const data = snapshot.val();
+    let reviewsList = [];
+    
+    if (data) {
+      reviewsList = Object.keys(data)
+        .map(key => ({ id: key, ...data[key] }));
+    }
+    
+    reviewsList.sort((a, b) => {
+      const timeA = a.timestamp || 0;
+      const timeB = b.timestamp || 0;
+      return timeB - timeA; // Newest first
+    });
+
+    // Merge with default reviews to ensure rich content
+    const combined = [...reviewsList];
+    DEFAULT_REVIEWS.forEach(dr => {
+      const matchText = currentLang === 'ru' ? dr.text_ru : dr.text_en;
+      if (!combined.some(r => r.name === dr.name && (r.text === matchText || r.text_en === dr.text_en))) {
+        combined.push({
+          name: dr.name,
+          rating: dr.stars || 5,
+          date: dr.date,
+          text: matchText,
+          tour: dr.tour || ''
+        });
+      }
+    });
+    
+    renderReviewsList(combined);
+  }, (error) => {
+    console.error("Error loading reviews:", error);
+    renderReviewsList(DEFAULT_REVIEWS);
+  });
+}
+
+function renderReviewsList(reviews) {
+  const reviewsGrid = document.getElementById('reviewsGrid');
+  if (!reviewsGrid) return;
+  
+  if (reviews.length === 0) {
+    reviewsGrid.innerHTML = `<div class="reviews-empty">${currentLang === 'en' ? 'No reviews yet.' : 'Отзывов пока нет.'}</div>`;
+    return;
+  }
+  
+  reviewsGrid.innerHTML = reviews.slice(0, 6).map(r => {
+    const rating = r.rating || r.stars || 5;
+    let starsHtml = '';
+    for (let i = 1; i <= 5; i++) {
+      starsHtml += `<span class="star ${i <= rating ? 'filled' : ''}">★</span>`;
+    }
+    
+    let text = r.text || '';
+    if (!text) {
+      text = currentLang === 'ru' ? (r.text_ru || r.text_en) : (r.text_en || r.text_ru);
+    }
+    
+    const avatarChar = r.name ? r.name.charAt(0).toUpperCase() : '?';
+    const tourText = r.tour ? `<div class="review-author-meta">${r.tour}</div>` : '';
+    
+    return `
+      <div class="review-card">
+        <div class="review-stars">
+          ${starsHtml}
+        </div>
+        <div class="review-text">"${text}"</div>
+        <div class="review-author">
+          <div class="review-avatar">${avatarChar}</div>
+          <div class="review-author-info">
+            <div class="review-author-name">${r.name}</div>
+            ${tourText}
+            <div class="review-author-meta">${r.date || ''}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function openReviewModal() {
+  const modal = document.getElementById('reviewModal');
+  if (modal) {
+    modal.classList.add('open');
+    document.getElementById('reviewName').value = '';
+    document.getElementById('reviewEmail').value = '';
+    document.getElementById('reviewText').value = '';
+    document.getElementById('reviewRating').value = '0';
+    setRating(0);
+    
+    const statusDiv = document.getElementById('reviewSubmitStatus');
+    if (statusDiv) {
+      statusDiv.style.display = 'none';
+      statusDiv.className = 'review-status';
+    }
+    
+    const reviewTourSelect = document.getElementById('reviewTour');
+    if (reviewTourSelect) {
+      reviewTourSelect.innerHTML = `<option value="">${currentLang === 'en' ? 'Select a tour...' : 'Выберите тур...'}</option>`;
+      PACKAGES.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p['name_en'];
+        opt.textContent = p['name_' + currentLang];
+        reviewTourSelect.appendChild(opt);
+      });
+    }
+  }
+}
+
+function closeReviewModal(event) {
+  if (!event || event.target === document.getElementById('reviewModal') || event.currentTarget.classList.contains('modal-close')) {
+    document.getElementById('reviewModal').classList.remove('open');
+  }
+}
+
+function setRating(val) {
+  document.getElementById('reviewRating').value = val;
+  const stars = document.querySelectorAll('#starRatingInput .star-input');
+  stars.forEach((star, idx) => {
+    if (idx < val) {
+      star.classList.add('selected');
+    } else {
+      star.classList.remove('selected');
+    }
+  });
+}
+
+function setupReviewsStars() {
+  const starContainer = document.getElementById('starRatingInput');
+  if (!starContainer) return;
+  
+  const stars = starContainer.querySelectorAll('.star-input');
+  stars.forEach((star, index) => {
+    star.addEventListener('mouseover', () => {
+      stars.forEach((s, idx) => {
+        if (idx <= index) {
+          s.classList.add('hovered');
+        } else {
+          s.classList.remove('hovered');
+        }
+      });
+    });
+    
+    star.addEventListener('mouseout', () => {
+      stars.forEach(s => s.classList.remove('hovered'));
+    });
+  });
+}
+
+function submitReview() {
+  const nameInput = document.getElementById('reviewName');
+  const emailInput = document.getElementById('reviewEmail');
+  const textInput = document.getElementById('reviewText');
+  const ratingInput = document.getElementById('reviewRating');
+  const tourSelect = document.getElementById('reviewTour');
+  const submitBtn = document.getElementById('submitReviewBtn');
+  
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const text = textInput.value.trim();
+  const rating = parseInt(ratingInput.value);
+  const tour = tourSelect.value;
+  
+  if (!rating || rating < 1 || rating > 5) {
+    showReviewStatus(currentLang === 'en' ? 'Please select a star rating.' : 'Пожалуйста, выберите оценку.', 'error');
+    return;
+  }
+  
+  if (!name) {
+    showReviewStatus(currentLang === 'en' ? 'Please enter your name.' : 'Пожалуйста, введите ваше имя.', 'error');
+    return;
+  }
+  
+  if (!email || !validateEmail(email)) {
+    showReviewStatus(currentLang === 'en' ? 'Please enter a valid email.' : 'Пожалуйста, введите корректный email.', 'error');
+    return;
+  }
+  
+  if (!text) {
+    showReviewStatus(currentLang === 'en' ? 'Please write your review.' : 'Пожалуйста, напишите ваш отзыв.', 'error');
+    return;
+  }
+  
+  if (typeof firebase === 'undefined' || !firebase.apps.length) {
+    showReviewStatus(currentLang === 'en' ? 'Firebase is not initialized.' : 'Firebase не инициализирован.', 'error');
+    return;
+  }
+  
+  submitBtn.disabled = true;
+  submitBtn.textContent = currentLang === 'en' ? 'Submitting...' : 'Отправка...';
+  
+  const newReview = {
+    name: name,
+    email: email,
+    rating: rating,
+    tour: tour,
+    text: text,
+    date: new Date().toISOString().split('T')[0],
+    approved: true,
+    lang: currentLang,
+    timestamp: firebase.database.ServerValue.TIMESTAMP
+  };
+  
+  const db = firebase.database();
+  db.ref('reviews').push(newReview)
+    .then(() => {
+      showReviewStatus(
+        currentLang === 'en' 
+          ? 'Thank you! Your review has been published.' 
+          : 'Спасибо! Ваш отзыв опубликован.',
+        'success'
+      );
+      
+      // Clear inputs
+      nameInput.value = '';
+      emailInput.value = '';
+      textInput.value = '';
+      ratingInput.value = '0';
+      setRating(0);
+      
+      // Attempt EmailJS notification
+      sendReviewNotificationEmail(newReview);
+      
+      setTimeout(() => {
+        closeReviewModal();
+        submitBtn.disabled = false;
+        submitBtn.textContent = currentLang === 'en' ? 'Submit Review' : 'Отправить отзыв';
+      }, 3000);
+    })
+    .catch(err => {
+      console.error("Error saving review:", err);
+      showReviewStatus(
+        currentLang === 'en' 
+          ? 'Error submitting review: ' + err.message 
+          : 'Ошибка при отправке отзыва: ' + err.message,
+        'error'
+      );
+      submitBtn.disabled = false;
+      submitBtn.textContent = currentLang === 'en' ? 'Submit Review' : 'Отправить отзыв';
+    });
+}
+
+function showReviewStatus(msg, type) {
+  const statusDiv = document.getElementById('reviewSubmitStatus');
+  if (statusDiv) {
+    statusDiv.textContent = msg;
+    statusDiv.style.display = 'block';
+    statusDiv.className = 'review-status ' + type;
+  }
+}
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function sendReviewNotificationEmail(review) {
+  if (typeof emailjs === 'undefined') return;
+  try {
+    const templateParams = {
+      reviewer_name: review.name,
+      reviewer_email: review.email,
+      rating: review.rating + " / 5",
+      tour_taken: review.tour || "General Feedback",
+      review_text: review.text,
+      submitted_date: review.date,
+      admin_email: "piyatuorsinfo@gmail.com"
+    };
+    
+    // Attempt sending using typical emailjs service
+    // Users can setup their public keys and service configs inside index.html or dashboard
+    emailjs.send('default_service', 'new_review_notification', templateParams)
+      .then(res => console.log('Notification sent', res))
+      .catch(err => console.warn('EmailJS delivery failed', err));
+  } catch(e) {
+    console.warn("EmailJS notification failed:", e);
+  }
 }

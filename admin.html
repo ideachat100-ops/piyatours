@@ -18,29 +18,42 @@
         </header>
 
         <div class="admin-grid">
-            <!-- Upload Section -->
-            <section class="card upload-section">
-                <h2>Upload New Photo</h2>
-                <form id="uploadForm">
-                    <div class="form-group">
-                        <label for="photoFile">Select Photo</label>
-                        <input type="file" id="photoFile" accept="image/*" required>
-                        <div id="imagePreview" class="image-preview"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="labelEn">English Description (Optional)</label>
-                        <input type="text" id="labelEn" placeholder="e.g. Safari at Yala">
-                    </div>
-                    <div class="form-group">
-                        <label for="labelRu">Russian Description (Optional)</label>
-                        <input type="text" id="labelRu" placeholder="e.g. Сафари в Яле">
-                    </div>
-                    <button type="submit" id="uploadBtn" class="btn btn-primary">Upload Photo</button>
-                    <div id="uploadStatus" class="status-msg"></div>
-                </form>
-            </section>
+            <!-- Left Column: Upload & Reviews -->
+            <div class="admin-sidebar-col" style="display: flex; flex-direction: column; gap: 30px;">
+                <!-- Upload Section -->
+                <section class="card upload-section">
+                    <h2>Upload New Photo</h2>
+                    <form id="uploadForm">
+                        <div class="form-group">
+                            <label for="photoFile">Select Photo</label>
+                            <input type="file" id="photoFile" accept="image/*" required>
+                            <div id="imagePreview" class="image-preview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="labelEn">English Description (Optional)</label>
+                            <input type="text" id="labelEn" placeholder="e.g. Safari at Yala">
+                        </div>
+                        <div class="form-group">
+                            <label for="labelRu">Russian Description (Optional)</label>
+                            <input type="text" id="labelRu" placeholder="e.g. Сафари в Яле">
+                        </div>
+                        <button type="submit" id="uploadBtn" class="btn btn-primary">Upload Photo</button>
+                        <div id="uploadStatus" class="status-msg"></div>
+                    </form>
+                </section>
 
-            <!-- Gallery Section -->
+                <!-- Reviews Management Section -->
+                <section class="card reviews-section-admin">
+                    <h2>Manage Reviews</h2>
+                    <p class="subtitle">Moderate user-submitted reviews</p>
+                    <div id="loadingReviews" class="loading">Loading reviews...</div>
+                    <div class="admin-reviews-list" id="adminReviewsList">
+                        <!-- Reviews will be rendered here via JS -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Gallery Section -->
             <section class="card gallery-section">
                 <h2>Manage Photos</h2>
                 <p class="subtitle">Photos uploaded via Firebase</p>
