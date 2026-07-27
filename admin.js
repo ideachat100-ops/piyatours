@@ -1,5 +1,26 @@
 // admin.js
 
+// Login System
+window.checkLogin = function() {
+    const user = document.getElementById('adminUsername').value.trim();
+    const pass = document.getElementById('adminPassword').value;
+    const errorMsg = document.getElementById('loginError');
+
+    // Supporting both 'piyatours' and 'piyarours' as requested
+    if ((user === 'piyatours' || user === 'piyarours') && pass === 'piyarathna123') {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('adminMainContent').style.display = 'block';
+        errorMsg.style.display = 'none';
+        
+        // Load data only after login
+        loadAdminGallery();
+        loadAdminReviews();
+    } else {
+        errorMsg.style.display = 'block';
+    }
+};
+
 // TODO: Replace with your complete Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyA9JKYUuW9stYqHK0Nw-9nEJ2GfaAOxP08",
@@ -324,6 +345,10 @@ window.deleteReview = async (id) => {
 
 // Initial load
 document.addEventListener('DOMContentLoaded', () => {
-    loadAdminGallery();
-    loadAdminReviews();
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('adminMainContent').style.display = 'block';
+        loadAdminGallery();
+        loadAdminReviews();
+    }
 });

@@ -8,7 +8,24 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <div class="admin-container">
+    <!-- Login Overlay -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-box">
+            <h2>Admin Login</h2>
+            <div id="loginError" class="status-msg status-error" style="display: none;">Invalid username or password</div>
+            <div class="form-group">
+                <label for="adminUsername">Username</label>
+                <input type="text" id="adminUsername" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Password</label>
+                <input type="password" id="adminPassword" placeholder="Enter password" onkeypress="if(event.key === 'Enter') checkLogin()">
+            </div>
+            <button onclick="checkLogin()" class="btn btn-primary" style="width: 100%;">Login</button>
+        </div>
+    </div>
+
+    <div class="admin-container" id="adminMainContent" style="display: none;">
         <header class="admin-header">
             <div class="header-content">
                 <img src="LOGO.jpg" alt="Logo" class="admin-logo">
