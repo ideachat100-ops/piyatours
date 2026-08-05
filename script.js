@@ -258,6 +258,7 @@ function applyLang() {
   renderHomePackages();
   renderFullPackages();
   renderGallery();
+  loadApprovedReviews();
 }
 
 function t(obj) {
@@ -275,6 +276,8 @@ function showPage(name) {
   if (page) page.classList.add('active');
   // Close mobile menu
   document.getElementById('navLinks').classList.remove('open');
+  document.getElementById('navbar').classList.remove('menu-open');
+  document.body.style.overflow = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
   // Update active nav
   document.querySelectorAll('.nav-links a').forEach(a => a.style.color = '');
@@ -283,6 +286,8 @@ function showPage(name) {
 // Hamburger
 document.getElementById('hamburger').addEventListener('click', () => {
   document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('navbar').classList.toggle('menu-open');
+  document.body.style.overflow = document.getElementById('navLinks').classList.contains('open') ? 'hidden' : '';
 });
 
 // Navbar scroll
@@ -606,15 +611,11 @@ function init() {
     return;
   }
   
-  renderHomePackages();
-  renderFullPackages();
-  renderGallery();
-  updatePackageSelects();
+  applyLang();
   startHeroSlideshow();
   injectBeruwalPhoto();
   injectHeroBranding();
   loadFirebaseGallery();
-  loadApprovedReviews();
   setupReviewsStars();
 }
 
@@ -726,6 +727,7 @@ function loadApprovedReviews() {
   }
 
   const db = firebase.database();
+  db.ref('reviews').off('value');
   db.ref('reviews').on('value', (snapshot) => {
     const data = snapshot.val();
     let reviewsList = [];
@@ -1002,5 +1004,14 @@ function sendReviewNotificationEmail(review) {
       .catch(err => console.warn('EmailJS delivery failed', err));
   } catch(e) {
     console.warn("EmailJS notification failed:", e);
+  }
+}
+
+// Scroll Reviews Slider
+function scrollReviews(direction) {
+  const grid = document.getElementById('reviewsGrid');
+  if (grid) {
+    const scrollAmount = window.innerWidth > 768 ? grid.clientWidth / 3 : grid.clientWidth;
+    grid.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
   }
 }

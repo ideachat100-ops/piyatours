@@ -702,15 +702,67 @@ footer {
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Reviews Slider Wrapper */
+.reviews-slider-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.review-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  color: var(--dark);
+}
+.review-nav-btn:hover {
+  background: var(--gold);
+  color: var(--white);
+  border-color: var(--gold);
+}
+.review-nav-btn.prev { left: -24px; }
+.review-nav-btn.next { right: -24px; }
+
 /* Reviews Grid */
 .reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   gap: 30px;
-  margin-bottom: 56px;
+  margin: 0 -20px 56px;
+  padding: 10px 20px 30px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(245, 166, 35, 0.5) rgba(0,0,0,0.04);
+}
+.reviews-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.reviews-grid::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.04);
+  border-radius: 10px;
+  margin: 0 20px;
+}
+.reviews-grid::-webkit-scrollbar-thumb {
+  background: rgba(245, 166, 35, 0.5);
+  border-radius: 10px;
+}
+.reviews-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 166, 35, 0.8);
 }
 .reviews-empty {
-  grid-column: 1 / -1;
+  flex: 1;
   text-align: center;
   padding: 40px;
   color: var(--text-light);
@@ -732,6 +784,8 @@ footer {
   flex-direction: column;
   gap: 16px;
   overflow: hidden;
+  flex: 0 0 calc(33.3333% - 20px);
+  scroll-snap-align: center;
 }
 .review-card::before {
   content: '\201C';
@@ -1000,27 +1054,46 @@ footer {
   .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
   .gallery-preview-grid .g-item:nth-child(1) { grid-column: span 1; grid-row: span 1; }
   .exp-badge { bottom: -10px; right: 10px; }
-  .reviews-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .reviews-grid { gap: 24px; }
+  .review-card { flex: 0 0 calc(50% - 12px); }
 }
 
 @media (max-width: 768px) {
   .section { padding: 60px 0; }
   .hamburger { display: flex; }
-  .nav-links {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(10, 15, 25, 0.98); backdrop-filter: blur(20px);
-    flex-direction: column; align-items: center; justify-content: center;
-    gap: 20px; z-index: 999;
+  #navbar.menu-open {
+    bottom: 0;
+    background: rgba(10, 15, 25, 0.98);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
   }
-  .nav-links.open { display: flex; }
-  .nav-links a { font-size: 20px; }
+  #navbar.menu-open .hamburger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  #navbar.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+  #navbar.menu-open .hamburger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-links {
+    display: none; position: absolute; top: 72px; left: 0; right: 0; bottom: 0;
+    background: transparent;
+    flex-direction: column; align-items: center; justify-content: center;
+    gap: 32px; z-index: 999;
+  }
+  .nav-links.open { display: flex; animation: navFadeIn 0.4s ease forwards; }
+  .nav-links a { font-size: 24px; font-weight: 500; }
+  
+  @keyframes navFadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .hero-btns { flex-direction: column; }
   .packages-grid { grid-template-columns: 1fr; }
   .hero-stats { gap: 24px; }
   .social-grid { grid-template-columns: 1fr; }
   .footer-container { grid-template-columns: 1fr; gap: 30px; }
   .gallery-preview-grid { grid-template-columns: repeat(2, 1fr); }
-  .reviews-grid { grid-template-columns: 1fr; }
+  .reviews-grid { gap: 16px; margin: 0 -20px 40px; }
+  .review-card { flex: 0 0 85%; }
+  .review-nav-btn { display: none; } /* Hide buttons on mobile, swipe is natural */
   .reviews-cta-inner { padding: 30px 24px; width: 100%; border-radius: 20px; }
 }
 
